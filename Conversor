@@ -1,17 +1,21 @@
-# Conversor de bases númericas.
-# Estrutura de entrada de dados
-num = int(input('Qual número você deseja converter? '))
-basei = int(input('Qual base este número está? '))
-basef = int(input('Para qual base? '))
+n = str(input('Digite um número em qualquer base: '))
+basei = int(input('Digite a base do número digitado: '))
 
-# Conversão basei --> base 10
-num1 = str(num)
-expo = len(num1)
-alg = 0
+carac = len(n)
 
+vlr = 0
+vlrnum = 0
+expo = 0
 soma = 0
-while expo != 0:
-    soma += ((basei ** (expo-1))* int(num1[alg]))
-    alg += 1
-    expo -= 1
+for c in range(carac - 1, -1, -1):
+    if n[c] in 'ABCDEF':
+        vlr = ord(n[c]) - 55
+        soma += (vlr * (basei ** expo))
+    elif n[c] in '01234556789':
+        vlrnum = int(n[c])
+        soma += (vlrnum * (basei ** expo))
+    else:
+        'Inválido.'    
+    expo += 1
+        
 print(soma)
