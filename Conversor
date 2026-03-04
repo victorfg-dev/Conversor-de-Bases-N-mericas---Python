@@ -1,12 +1,32 @@
-n = str(input('Digite um número em qualquer base: '))
-basei = int(input('Digite a base do número digitado: '))
+# Conversor de bases (2 ao 16)
+# Código de entrada de bases (basei = base inicial; basef = basefinal)
+# Logo abaixo dos inputs, o teste para saber se a base e o número são compatíveis
+validation = True
+while validation == True:
+    n = str(input('Digite um número em qualquer base: ')).strip().upper()
+    basei = int(input('Digite a base do número digitado: '))
+    carac = len(n.strip())
+    
+    if basei>16 or basei<2:
+        print('erro')
+        continue
+    
+    erro = False
+    for d in range(0, carac):
+        if n[d] not in '0123456789ABCDEF'[:basei]:
+            print('Base incompatível com o número.')
+            erro = True
+            break
+    if erro == True:
+        continue
 
-carac = len(n)
+    validation = False  
 
-vlr = 0
-vlrnum = 0
-expo = 0
-soma = 0
+    
+vlr = 0 # valor das letras
+vlrnum = 0 # valor dos números
+expo = 0 # expoente
+soma = 0 # resultado da conversão a base 10
 for c in range(carac - 1, -1, -1):
     if n[c] in 'ABCDEF':
         vlr = ord(n[c]) - 55
@@ -14,8 +34,6 @@ for c in range(carac - 1, -1, -1):
     elif n[c] in '01234556789':
         vlrnum = int(n[c])
         soma += (vlrnum * (basei ** expo))
-    else:
-        'Inválido.'    
     expo += 1
         
 print(soma)
