@@ -8,7 +8,7 @@ while validation == True:
     carac = len(n.strip())
     
     if basei>16 or basei<2:
-        print('erro')
+        print('Erro. Base inválida.')
         continue
     
     erro = False
@@ -22,6 +22,7 @@ while validation == True:
 
     validation = False  
 
+# Cálculo para ler caracteres, atribuir valores numéricos e conversão para base 10
     
 vlr = 0 # valor das letras
 vlrnum = 0 # valor dos números
@@ -31,9 +32,25 @@ for c in range(carac - 1, -1, -1):
     if n[c] in 'ABCDEF':
         vlr = ord(n[c]) - 55
         soma += (vlr * (basei ** expo))
-    elif n[c] in '01234556789':
+    elif n[c] in '0123456789':
         vlrnum = int(n[c])
         soma += (vlrnum * (basei ** expo))
     expo += 1
         
 print(soma)
+
+# Passando da base 10 para a basef (base final)
+# teste dr conversão da base 10 a basef (base final)
+basef = int(input('Qual a base para conversão (entre 2 e 16): ')) # base final
+resto = 0 # resto
+result = '' # resultado final
+
+while soma > 0:
+    resto = (soma % basef)
+    if resto >= 10:
+        result = chr(resto + 55) + result
+    else:
+        result = str(resto) + result
+    soma = soma // basef
+
+print('O número ', n, ' na base ', basei, ' convertido para a base ', basef, ' é: ', result)
